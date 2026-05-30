@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>শিখবো - Shikhbo</title>
+  <link rel="stylesheet" href="/static/css/chat.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+  <script>
+    if (localStorage.getItem('shikhbo_theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ── TOP BAR ─────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">শিখবো - Shikhbo</span>
+      </div>
+
+      <button class="nav-text-btn" onclick="openProfileModal()" data-en="Edit Profile" data-bn="প্রোফাইল আপডেট">প্রোফাইল
+        আপডেট</button>
+
+      <!-- Language Toggle -->
+      <div class="segmented-control">
+        <button class="seg-btn" id="langBnBtn" onclick="setLanguage('bn')">বাংলা</button>
+        <button class="seg-btn" id="langEnBtn" onclick="setLanguage('en')">English</button>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="segmented-control theme-toggle-control">
+        <button class="seg-btn" id="themeDarkBtn" onclick="setTheme('dark')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span data-en="Dark" data-bn="ডার্ক">Dark</span>
+        </button>
+        <button class="seg-btn" id="themeLightBtn" onclick="setTheme('light')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span data-en="Light" data-bn="লাইট">Light</span>
+        </button>
+      </div>
+
+      <button class="nav-text-btn logout-right" onclick="logout()" data-en="Log Out" data-bn="লগ আউট">লগ আউট</button>
+    </div>
+  </header>
+
+  <!-- ── CHAT AREA ──────────────────────────────────────────────────────── -->
+  <main class="chat-main">
+    <div class="left-panel">
+      <div class="panel-section">
+        <h4 data-en="Subject" data-bn="বিষয়">বিষয়</h4>
+        <div class="subject-list">
+          <button class="subject-item active" data-subject="ICT" onclick="selectSubject('ICT')" data-en="ICT"
+            data-bn="আইসিটি">আইসিটি</button>
+          <button class="subject-item" data-subject="Bangla" onclick="selectSubject('Bangla')" data-en="Bangla"
+            data-bn="বাংলা">বাংলা</button>
+          <button class="subject-item" data-subject="Physics" onclick="selectSubject('Physics')" data-en="Physics"
+            data-bn="পদার্থ">পদার্থ</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="panel-section">
+        <h4 data-en="Response Quality" data-bn="উত্তরের ধরন">উত্তরের ধরন</h4>
+        <div class="quality-list">
+          <button class="quality-item" data-quality="fast" onclick="setQuality('fast')" data-en="Fast"
+            data-bn="দ্রুত">দ্রুত</button>
+          <button class="quality-item active" data-quality="enhanced" onclick="setQuality('enhanced')"
+            data-en="Enhanced" data-bn="দক্ষ">দক্ষ</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="panel-section">
+        <h4 data-en="Mode" data-bn="মোড">মোড</h4>
+        <div class="mode-list">
+          <button class="mode-item active" data-mode="normal" onclick="setMode('normal')" data-en="Normal"
+            data-bn="স্বাভাবিক">স্বাভাবিক</button>
+          <button class="mode-item" data-mode="simple" onclick="setMode('simple')" data-en="Simple"
+            data-bn="সহজভাবে">সহজভাবে</button>
+          <button class="mode-item" data-mode="quiz" onclick="setMode('quiz')" data-en="Quiz"
+            data-bn="কুইজ">কুইজ</button>
+          <button class="mode-item" data-mode="step-by-step" onclick="setMode('step-by-step')" data-en="Step-by-Step"
+            data-bn="ধাপে ধাপে">ধাপে ধাপে</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-messages" id="chatMessages">
+        <div class="welcome-msg" id="welcomeMsg">
+          <div class="welcome-icon">⬡</div>
+          <h2><span data-en="Hello, " data-bn="হ্যালো, ">হ্যালো, </span><span id="welcomeName">বন্ধু</span>!</h2>
+          <p data-en="Pick a subject and mode, then ask me anything." data-bn="তোমার বিষয় ও পড়ার ধরন
+            নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।">তোমার বিষয় ও পড়ার ধরন
+            নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।</p>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <div class="input-inner">
+          <div class="context-chips">
+            <span class="chip" id="chipSubject">ICT</span>
+            <span class="chip chip-mode" id="chipMode" data-en="Normal" data-bn="স্বাভাবিক">স্বাভাবিক</span>
+            <span class="chip" id="chipQuality" data-en="Enhanced" data-bn="বিস্তারিত">বিস্তারিত</span>
+            <span class="chip chip-class" id="chipClass">—</span>
+            <span class="chip chip-curriculum" id="chipCurriculum">—</span>
+          </div>
+          <div id="attachmentArea" class="attachment-area"
+            style="display: none; margin-bottom: 8px; font-size: 0.85em; background: rgba(255, 255, 255, 0.1); padding: 4px 8px; border-radius: 4px; justify-content: space-between; align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span id="attachmentName" style="font-weight: 500;"></span>
+              <span style="font-size: 0.85em; color: var(--text-dim, #999); font-style: italic;"
+                data-en="* Text extraction only" data-bn="* শুধুমাত্র টেক্সট">*
+                শুধুমাত্র টেক্সট</span>
+            </div>
+            <button onclick="removeAttachment()"
+              style="background: none; border: none; color: inherit; cursor: pointer; font-size: 1.1em; line-height: 1;">&times;</button>
+          </div>
+          <div class="input-row" style="position: relative;">
+            <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
+
+            <button class="icon-btn clip-btn" id="clipBtn" onclick="toggleAttachmentMenu(event)" title="Attach File"
+              style="margin-right: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                </path>
+              </svg>
+            </button>
+            <div id="attachmentMenu"
+              style="display: none; position: absolute; bottom: 100%; left: 0; margin-bottom: 10px; background: var(--bg-panel, #2a2b32); border-radius: 8px; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 100; min-width: 140px; flex-direction: column; gap: 4px;">
+              <button onclick="triggerFileInput('application/pdf')"
+                style="background: none; border: none; padding: 8px 12px; color: inherit; cursor: pointer; text-align: left; border-radius: 4px; font-size: 0.9em; display: block; width: 100%; transition: background 0.2s;"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'"
+                data-en="Attach PDF" data-bn="পিডিএফ যুক্ত করো">পিডিএফ যুক্ত করো</button>
+              <button onclick="triggerFileInput('image/*')"
+                style="background: none; border: none; padding: 8px 12px; color: inherit; cursor: pointer; text-align: left; border-radius: 4px; font-size: 0.9em; display: block; width: 100%; transition: background 0.2s;"
+                onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'"
+                data-en="Attach Image" data-bn="ছবি যুক্ত করো">ছবি যুক্ত করো</button>
+            </div>
+            <textarea id="queryInput" data-en="Ask a question…" data-bn="প্রশ্ন লিখো…" placeholder="প্রশ্ন লিখো…"
+              rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+            <button class="icon-btn mic-btn" id="micBtn" onclick="toggleRecording()" title="Record Audio">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+            </button>
+            <button class="send-btn" id="sendBtn" onclick="sendQuery()">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <path d="M3 10L17 3l-7 7 7 7-14-7z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── PROFILE MODAL ──────────────────────────────────────────────────── -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 data-en="Edit Profile" data-bn="প্রোফাইল আপডেট">প্রোফাইল আপডেট</h2>
+        <button class="close-modal" onclick="closeProfileModal()">&#x2715;</button>
+      </div>
+      <div class="form-group">
+        <label data-en="Full Name" data-bn="পুরো নাম">পুরো নাম</label>
+        <input type="text" id="updateName" placeholder="তোমার নাম" />
+      </div>
+      <div class="form-group">
+        <label data-en="Class / Grade" data-bn="ক্লাস">ক্লাস</label>
+        <input type="text" id="updateClass" placeholder="যেমন: ক্লাস ১০" />
+      </div>
+      <div class="form-group">
+        <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
+        <select id="updateCurriculum">
+          <option value="">নির্বাচন করুন…</option>
+          <option value="National" data-en="National" data-bn="ন্যাশনাল">ন্যাশনাল</option>
+          <option value="Cambridge" data-en="Cambridge" data-bn="ক্যামব্রিজ">ক্যামব্রিজ</option>
+          <option value="IB" data-en="IB" data-bn="আইবি">আইবি</option>
+          <option value="Other" data-en="Other" data-bn="অন্যান্য">অন্যান্য</option>
+        </select>
+      </div>
+      <button class="save-btn" onclick="saveProfile()" data-en="Save Changes" data-bn="সেভ করুন">সেভ করুন</button>
+      <p class="modal-error" id="profileError"></p>
+    </div>
+  </div>
+
+  <script>
+    // In a full REST app, we fetch the current user's info instead of using Jinja templates
+    let SERVER_USER = null;
+    fetch('/api/me')
+      .then(r => r.json())
+      .then(data => {
+        if (data.user) {
+          SERVER_USER = data.user;
+          if (typeof initUserInfo === 'function') initUserInfo();
+        }
+      });
+  </script>
+  <script src="/static/js/lang.js"></script>
+  <script src="/static/js/chat.js"></script>
+</body>
+
+</html>

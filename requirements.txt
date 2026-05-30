@@ -1,0 +1,10 @@
+torch
+ollama             
+faiss-cpu        
+rank-bm25          
+FlagEmbedding      
+langchain-core
+langchain-community
+langchain-huggingface
+paddleocr
+piper-tts

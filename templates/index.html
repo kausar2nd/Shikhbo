@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>শিখবো - Shikhbo</title>
+  <link rel="stylesheet" href="/static/css/landing.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Background grid -->
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- Main container -->
+  <div class="landing-wrapper">
+
+    <header class="site-header" style="justify-content: space-between;">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">শিখবো - Shikhbo</span>
+      </div>
+      <button id="langToggleBtn" onclick="toggleLanguage()" class="lang-toggle">English</button>
+    </header>
+
+    <main class="hero">
+      <div class="hero-text-content">
+        <p class="hero-label" data-en="Your AI Study Partner" data-bn="তোমার AI স্টাডি পার্টনার">তোমার AI স্টাডি
+          পার্টনার</p>
+        <h1 class="hero-title" data-en="Learn smarter,<br><em>not harder.</em>"
+          data-bn="শেখার স্মার্ট সলিউশন<br><em>এখন বই থেকেই</em>">আপনার সার্বক্ষণিক,<br><em>আপনার সার্বক্ষণিক স্টাডি
+            পার্টনার।</em></h1>
+        <p class="hero-sub" data-en="Tough topics, now in your pocket. Study made easy, step by step, your way."
+          data-bn="কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।">কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা
+          হোক সহজ, ধাপে ধাপে, নিজের মতো</p>
+      </div>
+
+      <div class="auth-panel" id="authPanel">
+        <!-- Tab switcher -->
+        <div class="tab-bar">
+          <button class="tab active" id="tabLogin" onclick="switchTab('login')" data-en="Log In" data-bn="লগ ইন">লগ
+            ইন</button>
+          <button class="tab" id="tabSignup" onclick="switchTab('signup')" data-en="Sign Up" data-bn="সাইন আপ">সাইন
+            আপ</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
+          <div class="field-group">
+            <label data-en="Email" data-bn="ইমেইল">ইমেইল</label>
+            <input type="email" id="loginEmail" placeholder="you@school.edu" required />
+          </div>
+          <div class="field-group">
+            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
+            <input type="password" id="loginPassword" data-en="••••••••" data-bn="••••••••" placeholder="••••••••"
+              required />
+          </div>
+          <div class="error-msg" id="loginError"></div>
+          <button type="submit" class="btn-primary" id="loginBtn">
+            <span class="btn-text" data-en="Log In" data-bn="লগ ইন">লগ ইন</span>
+            <span class="btn-loader" style="display:none">●●●</span>
+          </button>
+          <p class="switch-hint" data-en="No account? <a href='#' onclick='switchTab(&quot;signup&quot;)'>Sign up</a>"
+            data-bn="অ্যাকাউন্ট নেই? <a href='#' onclick='switchTab(&quot;signup&quot;)'>সাইন আপ করুন</a>">অ্যাকাউন্ট
+            নেই? <a href='#' onclick='switchTab("signup")'>সাইন আপ করুন</a></p>
+        </form>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+          <div class="fields-row">
+            <div class="field-group">
+              <label data-en="Full Name" data-bn="পুরো নাম">পুরো নাম</label>
+              <input type="text" id="signupName" data-en="Your name" data-bn="আপনার নাম" placeholder="আপনার নাম"
+                required />
+            </div>
+            <div class="field-group">
+              <label data-en="Email" data-bn="ইমেইল">ইমেইল</label>
+              <input type="email" id="signupEmail" placeholder="you@school.edu" required />
+            </div>
+          </div>
+          <div class="field-group">
+            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
+            <input type="password" id="signupPassword" data-en="Create a password" data-bn="পাসওয়ার্ড তৈরি করুন"
+              placeholder="পাসওয়ার্ড তৈরি করুন" required />
+          </div>
+          <div class="fields-row">
+            <div class="field-group">
+              <label data-en="Class / Grade" data-bn="ক্লাস / গ্রেড">ক্লাস / গ্রেড</label>
+              <input type="text" id="signupClass" data-en="e.g. Class 10" data-bn="উদাঃ ক্লাস ১০"
+                placeholder="উদাঃ ক্লাস ১০" required />
+            </div>
+            <div class="field-group">
+              <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
+              <select id="signupCurriculum" required>
+                <option value="" disabled selected data-en="Select…" data-bn="নির্বাচন করুন…">নির্বাচন করুন…</option>
+                <option value="National" data-en="National" data-bn="ন্যাশনাল">ন্যাশনাল</option>
+                <option value="Cambridge" data-en="Cambridge" data-bn="ক্যামব্রিজ">ক্যামব্রিজ</option>
+                <option value="IB" data-en="IB" data-bn="আইবি">আইবি</option>
+                <option value="Other" data-en="Other" data-bn="অন্যান্য">অন্যান্য</option>
+              </select>
+            </div>
+          </div>
+          <div class="error-msg" id="signupError"></div>
+          <button type="submit" class="btn-primary" id="signupBtn">
+            <span class="btn-text" data-en="Create Account" data-bn="অ্যাকাউন্ট তৈরি করুন">অ্যাকাউন্ট তৈরি করুন</span>
+            <span class="btn-loader" style="display:none">●●●</span>
+          </button>
+          <p class="switch-hint"
+            data-en="Already a member? <a href='#' onclick='switchTab(&quot;login&quot;)'>Log in</a>"
+            data-bn="আগে থেকেই সদস্য? <a href='#' onclick='switchTab(&quot;login&quot;)'>লগ ইন করুন</a>">আগে থেকেই
+            সদস্য? <a href='#' onclick='switchTab("login")'>লগ ইন করুন</a></p>
+        </form>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <span>Shikhbo © 2026</span>
+    </footer>
+
+  </div>
+
+  <script src="/static/js/lang.js"></script>
+  <script src="/static/js/landing.js"></script>
+</body>
+
+</html>
