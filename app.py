@@ -119,6 +119,20 @@ def login():
     if not email or not password:
         return jsonify({"error": "Email and password required."}), 400
 
+    # Demo Mode: Rule Based Mechanism
+    if email == "test@shikhbo.com" and password == "Test@Shikhobo":
+        session["user"] = {
+            "uid": 1,
+            "name": "Kausar Ahmed",
+            "email": "test@shikhbo.com",
+            "class": "SSC",
+            "curriculum": "National",
+        }
+        return jsonify({"message": "Login successful.", "user": session["user"]}), 200
+    else:
+        return jsonify({"error": "Invalid email or password (use test account)."}), 401
+
+    """
     try:
         conn = get_db()
         cur = conn.cursor(dictionary=True)
@@ -143,6 +157,7 @@ def login():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    """
 
 
 @app.route("/api/logout", methods=["POST"])

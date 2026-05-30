@@ -9,3 +9,4 @@ langchain-huggingface
 paddleocr
 piper-tts
 gunicorn
+flask
