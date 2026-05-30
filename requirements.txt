@@ -9,4 +9,10 @@ langchain-huggingface
 paddleocr
 piper-tts
 gunicorn
-flask
+Flask
+Flask-Cors
+mysql-connector-python
+faster-whisper
+banglaspeech2text
+PyMuPDF
+langdetect
