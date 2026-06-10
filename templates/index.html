@@ -38,17 +38,17 @@
           data-bn="শেখার স্মার্ট সলিউশন<br><em>এখন বই থেকেই</em>">আপনার সার্বক্ষণিক,<br><em>আপনার সার্বক্ষণিক স্টাডি
             পার্টনার।</em></h1>
         <p class="hero-sub" data-en="Tough topics, now in your pocket. Study made easy, step by step, your way."
-          data-bn="কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।">কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা
+          data-bn="কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।">কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা
           হোক সহজ, ধাপে ধাপে, নিজের মতো</p>
       </div>
 
       <div class="auth-panel" id="authPanel">
-        <!-- Tab switcher -->
+        <!-- TAB BAR -->
         <div class="tab-bar">
           <button class="tab active" id="tabLogin" onclick="switchTab('login')" data-en="Log In" data-bn="লগ ইন">লগ
             ইন</button>
-          <button class="tab" id="tabSignup" onclick="switchTab('signup')" data-en="Sign Up" data-bn="সাইন আপ">সাইন
-            আপ</button>
+          <button class="tab" id="tabSignup" onclick="switchTab('signup')" data-en="Sign Up"
+            data-bn="রেজিস্টার">রেজিস্টার</button>
         </div>
 
         <!-- LOGIN FORM -->
@@ -58,7 +58,7 @@
             <input type="email" id="loginEmail" placeholder="you@school.edu" required />
           </div>
           <div class="field-group">
-            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
+            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
             <input type="password" id="loginPassword" data-en="••••••••" data-bn="••••••••" placeholder="••••••••"
               required />
           </div>
@@ -67,55 +67,57 @@
             <span class="btn-text" data-en="Log In" data-bn="লগ ইন">লগ ইন</span>
             <span class="btn-loader" style="display:none">●●●</span>
           </button>
-          <p class="switch-hint" data-en="No account? <a href='#' onclick='switchTab(&quot;signup&quot;)'>Sign up</a>"
-            data-bn="অ্যাকাউন্ট নেই? <a href='#' onclick='switchTab(&quot;signup&quot;)'>সাইন আপ করুন</a>">অ্যাকাউন্ট
-            নেই? <a href='#' onclick='switchTab("signup")'>সাইন আপ করুন</a></p>
+          <p class="switch-hint"
+            data-en="Don't have an account? <a href='#' onclick='switchTab(&quot;signup&quot;); return false;'>Sign Up</a>"
+            data-bn="অ্যাকাউন্ট নেই? <a href='#' onclick='switchTab(&quot;signup&quot;); return false;'>রেজিস্টার করো</a>">
+            অ্যাকাউন্ট নেই? <a href="#" onclick="switchTab('signup'); return false;">রেজিস্টার করো</a></p>
         </form>
 
-        <!-- SIGNUP FORM -->
+        <!-- SIGN UP FORM -->
         <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
-          <div class="fields-row">
-            <div class="field-group">
-              <label data-en="Full Name" data-bn="পুরো নাম">পুরো নাম</label>
-              <input type="text" id="signupName" data-en="Your name" data-bn="আপনার নাম" placeholder="আপনার নাম"
-                required />
-            </div>
-            <div class="field-group">
-              <label data-en="Email" data-bn="ইমেইল">ইমেইল</label>
-              <input type="email" id="signupEmail" placeholder="you@school.edu" required />
-            </div>
+          <div class="field-group">
+            <label data-en="Full Name" data-bn="পুরো নাম">পুরো নাম</label>
+            <input type="text" id="signupName" data-en="Your name" data-bn="তোমার নাম" placeholder="তোমার নাম"
+              required />
           </div>
           <div class="field-group">
-            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
-            <input type="password" id="signupPassword" data-en="Create a password" data-bn="পাসওয়ার্ড তৈরি করুন"
-              placeholder="পাসওয়ার্ড তৈরি করুন" required />
+            <label data-en="Email" data-bn="ইমেইল">ইমেইল</label>
+            <input type="email" id="signupEmail" placeholder="you@school.edu" required />
           </div>
           <div class="fields-row">
             <div class="field-group">
-              <label data-en="Class / Grade" data-bn="ক্লাস / গ্রেড">ক্লাস / গ্রেড</label>
-              <input type="text" id="signupClass" data-en="e.g. Class 10" data-bn="উদাঃ ক্লাস ১০"
-                placeholder="উদাঃ ক্লাস ১০" required />
+              <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
+              <select id="signupCurriculum" required onchange="populateClassDropdown(this.value, 'signupClass')">
+                <option value="" data-en="Select…" data-bn="নির্বাচন করো…">নির্বাচন করো…</option>
+                <option value="NCTB (Bangla)">NCTB (Bangla)</option>
+                <option value="NCTB (English)">NCTB (English)</option>
+                <option value="Madrasah">Madrasah</option>
+                <option value="Edexcel">Edexcel</option>
+                <option value="Cambridge">Cambridge</option>
+                <option value="IB">IB</option>
+              </select>
             </div>
             <div class="field-group">
-              <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
-              <select id="signupCurriculum" required>
-                <option value="" disabled selected data-en="Select…" data-bn="নির্বাচন করুন…">নির্বাচন করুন…</option>
-                <option value="National" data-en="National" data-bn="ন্যাশনাল">ন্যাশনাল</option>
-                <option value="Cambridge" data-en="Cambridge" data-bn="ক্যামব্রিজ">ক্যামব্রিজ</option>
-                <option value="IB" data-en="IB" data-bn="আইবি">আইবি</option>
-                <option value="Other" data-en="Other" data-bn="অন্যান্য">অন্যান্য</option>
+              <label data-en="Class / Grade" data-bn="ক্লাস">ক্লাস</label>
+              <select id="signupClass" required disabled>
+                <option value="" data-en="Select curriculum first" data-bn="আগে কারিকুলাম নির্বাচন করো">আগে কারিকুলাম নির্বাচন করো</option>
               </select>
             </div>
           </div>
+          <div class="field-group">
+            <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
+            <input type="password" id="signupPassword" data-en="Min 6 characters" data-bn="কমপক্ষে ৬ অক্ষর" placeholder="কমপক্ষে ৬ অক্ষর"
+              required minlength="6" />
+          </div>
           <div class="error-msg" id="signupError"></div>
           <button type="submit" class="btn-primary" id="signupBtn">
-            <span class="btn-text" data-en="Create Account" data-bn="অ্যাকাউন্ট তৈরি করুন">অ্যাকাউন্ট তৈরি করুন</span>
+            <span class="btn-text" data-en="Create Account" data-bn="অ্যাকাউন্ট তৈরি করো">অ্যাকাউন্ট তৈরি করো</span>
             <span class="btn-loader" style="display:none">●●●</span>
           </button>
           <p class="switch-hint"
-            data-en="Already a member? <a href='#' onclick='switchTab(&quot;login&quot;)'>Log in</a>"
-            data-bn="আগে থেকেই সদস্য? <a href='#' onclick='switchTab(&quot;login&quot;)'>লগ ইন করুন</a>">আগে থেকেই
-            সদস্য? <a href='#' onclick='switchTab("login")'>লগ ইন করুন</a></p>
+            data-en="Already have an account? <a href='#' onclick='switchTab(&quot;login&quot;); return false;'>Log In</a>"
+            data-bn="অ্যাকাউন্ট আছে? <a href='#' onclick='switchTab(&quot;login&quot;); return false;'>লগ ইন করো</a>">
+            অ্যাকাউন্ট আছে? <a href="#" onclick="switchTab('login'); return false;">লগ ইন করো</a></p>
         </form>
       </div>
     </main>

@@ -37,28 +37,7 @@ function applyLanguage() {
     }
 }
 
-// ── Theme ─────────────────────────────────────────────────────────────────
-function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('shikhbo_theme', theme);
-    updateThemeButtons(theme);
-}
-
-function updateThemeButtons(theme) {
-    const btnDark = document.getElementById('themeDarkBtn');
-    const btnLight = document.getElementById('themeLightBtn');
-    if (btnDark && btnLight) {
-        btnDark.classList.toggle('active', theme !== 'light');
-        btnLight.classList.toggle('active', theme === 'light');
-    }
-}
-
-// ── Boot ──────────────────────────────────────────────────────────────────
+// ── Boot ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('shikhbo_theme') || 'dark';
-    if (savedTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-    }
-    updateThemeButtons(savedTheme);
     applyLanguage();
 });

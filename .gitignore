@@ -3,6 +3,16 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# raw data folder
+raw_data/
+
+# knowledge base (generated FAISS index)
+knowledge_base/
+
+# user uploads
+uploads/
+
+
 # C extensions
 *.so
 

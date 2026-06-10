@@ -10,11 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
     rel="stylesheet">
-  <script>
-    if (localStorage.getItem('shikhbo_theme') === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  </script>
+
 </head>
 
 <body>
@@ -36,31 +32,7 @@
         <button class="seg-btn" id="langEnBtn" onclick="setLanguage('en')">English</button>
       </div>
 
-      <!-- Theme Toggle -->
-      <div class="segmented-control theme-toggle-control">
-        <button class="seg-btn" id="themeDarkBtn" onclick="setTheme('dark')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <span data-en="Dark" data-bn="ডার্ক">Dark</span>
-        </button>
-        <button class="seg-btn" id="themeLightBtn" onclick="setTheme('light')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <span data-en="Light" data-bn="লাইট">Light</span>
-        </button>
-      </div>
+
 
       <button class="nav-text-btn logout-right" onclick="logout()" data-en="Log Out" data-bn="লগ আউট">লগ আউট</button>
     </div>
@@ -80,20 +52,6 @@
             data-bn="পদার্থ">পদার্থ</button>
         </div>
       </div>
-
-      <hr />
-
-      <div class="panel-section">
-        <h4 data-en="Response Quality" data-bn="উত্তরের ধরন">উত্তরের ধরন</h4>
-        <div class="quality-list">
-          <button class="quality-item" data-quality="fast" onclick="setQuality('fast')" data-en="Fast"
-            data-bn="দ্রুত">দ্রুত</button>
-          <button class="quality-item active" data-quality="enhanced" onclick="setQuality('enhanced')"
-            data-en="Enhanced" data-bn="দক্ষ">দক্ষ</button>
-        </div>
-      </div>
-
-      <hr />
 
       <div class="panel-section">
         <h4 data-en="Mode" data-bn="মোড">মোড</h4>
@@ -126,46 +84,35 @@
           <div class="context-chips">
             <span class="chip" id="chipSubject">ICT</span>
             <span class="chip chip-mode" id="chipMode" data-en="Normal" data-bn="স্বাভাবিক">স্বাভাবিক</span>
-            <span class="chip" id="chipQuality" data-en="Enhanced" data-bn="বিস্তারিত">বিস্তারিত</span>
             <span class="chip chip-class" id="chipClass">—</span>
             <span class="chip chip-curriculum" id="chipCurriculum">—</span>
           </div>
-          <div id="attachmentArea" class="attachment-area"
-            style="display: none; margin-bottom: 8px; font-size: 0.85em; background: rgba(255, 255, 255, 0.1); padding: 4px 8px; border-radius: 4px; justify-content: space-between; align-items: center;">
-            <div style="display: flex; flex-direction: column; gap: 2px;">
-              <span id="attachmentName" style="font-weight: 500;"></span>
-              <span style="font-size: 0.85em; color: var(--text-dim, #999); font-style: italic;"
-                data-en="* Text extraction only" data-bn="* শুধুমাত্র টেক্সট">*
-                শুধুমাত্র টেক্সট</span>
-            </div>
-            <button onclick="removeAttachment()"
-              style="background: none; border: none; color: inherit; cursor: pointer; font-size: 1.1em; line-height: 1;">&times;</button>
-          </div>
-          <div class="input-row" style="position: relative;">
-            <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(event)">
 
-            <button class="icon-btn clip-btn" id="clipBtn" onclick="toggleAttachmentMenu(event)" title="Attach File"
-              style="margin-right: 8px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                  d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
-                </path>
+          <!-- Attachment preview (hidden by default) -->
+          <div class="attachment-preview" id="attachmentPreview" style="display: none;">
+            <div class="attachment-chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
-            </button>
-            <div id="attachmentMenu"
-              style="display: none; position: absolute; bottom: 100%; left: 0; margin-bottom: 10px; background: var(--bg-panel, #2a2b32); border-radius: 8px; padding: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 100; min-width: 140px; flex-direction: column; gap: 4px;">
-              <button onclick="triggerFileInput('application/pdf')"
-                style="background: none; border: none; padding: 8px 12px; color: inherit; cursor: pointer; text-align: left; border-radius: 4px; font-size: 0.9em; display: block; width: 100%; transition: background 0.2s;"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'"
-                data-en="Attach PDF" data-bn="পিডিএফ যুক্ত করো">পিডিএফ যুক্ত করো</button>
-              <button onclick="triggerFileInput('image/*')"
-                style="background: none; border: none; padding: 8px 12px; color: inherit; cursor: pointer; text-align: left; border-radius: 4px; font-size: 0.9em; display: block; width: 100%; transition: background 0.2s;"
-                onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='none'"
-                data-en="Attach Image" data-bn="ছবি যুক্ত করো">ছবি যুক্ত করো</button>
+              <span id="attachmentName">file.pdf</span>
+              <button class="attachment-remove" id="attachmentRemoveBtn" onclick="removeAttachment()" title="Remove">&times;</button>
             </div>
+          </div>
+
+          <div class="input-row">
             <textarea id="queryInput" data-en="Ask a question…" data-bn="প্রশ্ন লিখো…" placeholder="প্রশ্ন লিখো…"
               rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+
+            <!-- Hidden file input -->
+            <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.webp,.gif,.pdf,.txt" style="display: none;" onchange="handleFileSelect(event)" />
+
+            <button class="icon-btn clip-btn" id="clipBtn" onclick="document.getElementById('fileInput').click()" title="Attach file">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+              </svg>
+            </button>
             <button class="icon-btn mic-btn" id="micBtn" onclick="toggleRecording()" title="Record Audio">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -198,17 +145,21 @@
         <input type="text" id="updateName" placeholder="তোমার নাম" />
       </div>
       <div class="form-group">
-        <label data-en="Class / Grade" data-bn="ক্লাস">ক্লাস</label>
-        <input type="text" id="updateClass" placeholder="যেমন: ক্লাস ১০" />
+        <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
+        <select id="updateCurriculum" onchange="populateProfileClassDropdown(this.value)">
+          <option value="">নির্বাচন করুন…</option>
+          <option value="NCTB (Bangla)">NCTB (Bangla)</option>
+          <option value="NCTB (English)">NCTB (English)</option>
+          <option value="Madrasah">Madrasah</option>
+          <option value="Edexcel">Edexcel</option>
+          <option value="Cambridge">Cambridge</option>
+          <option value="IB">IB</option>
+        </select>
       </div>
       <div class="form-group">
-        <label data-en="Curriculum" data-bn="কারিকুলাম">কারিকুলাম</label>
-        <select id="updateCurriculum">
-          <option value="">নির্বাচন করুন…</option>
-          <option value="National" data-en="National" data-bn="ন্যাশনাল">ন্যাশনাল</option>
-          <option value="Cambridge" data-en="Cambridge" data-bn="ক্যামব্রিজ">ক্যামব্রিজ</option>
-          <option value="IB" data-en="IB" data-bn="আইবি">আইবি</option>
-          <option value="Other" data-en="Other" data-bn="অন্যান্য">অন্যান্য</option>
+        <label data-en="Class / Grade" data-bn="ক্লাস">ক্লাস</label>
+        <select id="updateClass" disabled>
+          <option value="">আগে কারিকুলাম নির্বাচন করো</option>
         </select>
       </div>
       <button class="save-btn" onclick="saveProfile()" data-en="Save Changes" data-bn="সেভ করুন">সেভ করুন</button>

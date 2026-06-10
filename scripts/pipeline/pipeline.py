@@ -1,25 +1,24 @@
-import json
 import logging
 
 try:
     from scripts.utils.prompts import Prompts
     from scripts.pipeline.generator import Generator
     from scripts.pipeline.retriever import Retriever
-except ImportError as e:
+    from scripts.utils.context_builder import ContextBuilder
+except ImportError:
     from utils.prompts import Prompts
-    from pipeline.generator import Generator
-    from pipeline.retriever import Retriever
+    from generator import Generator
+    from retriever import Retriever
+    from utils.context_builder import ContextBuilder
 
 logger = logging.getLogger(__name__)
 
-logger.info("Initializing AI Pipeline components...")
-try:
-    retriever = Retriever()
-    generator = Generator()
-    prompts = Prompts()
-    logger.info("Pipeline components initialized.")
-except Exception as e:
-    logger.error(f"Failed to initialize pipeline components: {e}")
+MAX_DEPTH = 5  # keep last 5 user+assistant pairs
+
+retriever = Retriever()
+generator = Generator()
+prompts = Prompts()
+ctx_builder = ContextBuilder()
 
 
 def run_pipeline_stream(user_json: dict):
@@ -27,56 +26,83 @@ def run_pipeline_stream(user_json: dict):
     class_level = user_json.get("class_level", "")
     subject = user_json.get("subject", "")
     mode = user_json.get("mode") or "normal"
-    response_quality = user_json.get("response_quality", "fast")
+    curriculum = user_json.get("curriculum", "")
     messages = user_json.get("messages", [])
-
+    file_path = user_json.get("file_path", None)
     logger.info(f"Running pipeline stream for query: {query}")
 
+    yield {"status": "thinking"}
+
+    # 1. Retrieve docs
     try:
+        yield {"status": "retrieving"}
         docs = retriever.retrieve(
             query,
             class_filter=class_level,
             subject_filter=subject,
-            response_quality=response_quality,
         )
-
-        # Inject system prompt into messages if none exist
-        if not any(m.get("role") == "system" for m in messages):
-            system_prompt = prompts.get(
-                query=query,
-                class_level=class_level,
-                subject=subject,
-                curriculum=user_json.get("curriculum", ""),
-                mode=mode,
-            )
-            system_instruction = system_prompt.replace("{context}", "").strip()
-            messages.insert(0, {"role": "system", "content": system_instruction})
-
-        # Generate stream
-        for payload in generator.generate_stream(messages=messages, docs=docs):
-            yield payload
-
     except Exception as e:
-        logger.error(f"Pipeline error: {e}")
-        yield {"chunk": f"\nAn error occurred in the pipeline: {e}"}
-        yield {"sources": []}
+        logger.error(f"Error retrieving docs: {e}")
+        docs = []
 
+    # 2. Build full prompt with context injected
+    has_file = file_path is not None and file_path != ""
+    prompt_template = prompts.get(
+        query=query,
+        class_level=class_level,
+        subject=subject,
+        curriculum=curriculum,
+        mode=mode,
+        has_file=has_file,
+    )
+    context_text = ctx_builder.aggregate(docs) if docs else "No relevant context found."
+    full_prompt = prompt_template.replace("{context}", context_text)
+
+    # 3. Append current turn
+    messages.append({"role": "user", "content": full_prompt})
+
+    # 4. Trim to MAX_DEPTH pairs
+    max_messages = MAX_DEPTH * 2
+    if len(messages) > max_messages:
+        messages = messages[len(messages) - max_messages :]
+
+    yield {"status": "synthesizing"}
+
+    # 5. Stream (pass file_path to generator)
+    for payload in generator.generate_stream(
+        messages=messages,
+        docs=docs,
+        file_path=file_path,
+    ):
+        yield payload
+
+
+# ── Smoke test ────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    from scripts.utils.user_data import UserData
-    from scripts.utils.input_handler import InputHandler
-    from scripts.utils.output_handler import OutputHandler
+    messages = []
 
-    # 1 - Get user data
-    user_str = UserData().get_user("key_placeholder")
-    user_data = json.loads(user_str)
+    while True:
+        query = input("You: ").strip()
+        if query.lower() in ("exit", "quit"):
+            break
 
-    # 2 - Get user input (text, audio, or image)
-    query = InputHandler().get_input()
-    user_data["query"] = query
+        user_json = {
+            "query": query,
+            "class_level": "SSC",
+            "subject": "ICT",
+            "curriculum": "NCTB",
+            "mode": "normal",
+            "messages": messages,
+        }
 
-    # 3 - Run pipeline
-    response_dict = run_pipeline_stream(user_data)
+        assistant_reply = ""
+        for payload in run_pipeline_stream(user_json):
+            if "chunk" in payload:
+                print(payload["chunk"], end="", flush=True)
+                assistant_reply += payload["chunk"]
+            elif "sources" in payload and payload["sources"]:
+                print("\nSources:\n- " + "\n- ".join(payload["sources"]))
 
-    # 4 - Output the response to the user
-    OutputHandler().deliver(response_dict.get("answer", str(response_dict)))
+        print()
+        messages.append({"role": "assistant", "content": assistant_reply})

@@ -32,21 +32,7 @@
   --page-bg-pattern: rgba(255, 255, 255, 0.01);
 }
 
-/* ── Light Theme ─────────────────────────────────────────────────────────── */
-:root[data-theme="light"] {
-  --bg: #f4f5f7;
-  --surface: #ffffff;
-  --surface-2: #303841;
-  --surface-3: #3d444e;
-  --border: rgba(255, 255, 255, 0.15);
-  --border-active: rgba(255, 255, 255, 0.6);
-  --accent-dim: rgba(48, 56, 65, 0.1);
-  --accent-glow: rgba(48, 56, 65, 0.2);
-  --text: #1a1d21;
-  --text-muted: #909090;
-  --topbar-bg: rgba(255, 255, 255, 0.94);
-  --page-bg-pattern: rgba(0, 0, 0, 0.03);
-}
+
 
 html,
 body {
@@ -223,6 +209,64 @@ hr {
   height: 44px;
 }
 
+.clip-btn.has-file {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+
+/* ── Attachment Preview ─────────────────────────────────────────────────── */
+.attachment-preview {
+  display: flex;
+  align-items: center;
+  animation: fadeUp 0.2s ease both;
+}
+
+.attachment-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 280px;
+}
+
+.attachment-chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.attachment-chip svg {
+  flex-shrink: 0;
+  color: var(--green);
+}
+
+.attachment-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.attachment-remove:hover {
+  color: var(--red);
+  background: rgba(255, 95, 109, 0.15);
+}
+
+
 @keyframes pulse {
   0% {
     opacity: 1;
@@ -275,7 +319,6 @@ hr {
 }
 
 .subject-list,
-.quality-list,
 .mode-list {
   display: flex;
   flex-wrap: wrap;
@@ -284,7 +327,6 @@ hr {
 }
 
 .subject-item,
-.quality-item,
 .mode-item {
   background: transparent;
   border: 1px solid var(--border);
@@ -299,7 +341,6 @@ hr {
 }
 
 .subject-item:hover,
-.quality-item:hover,
 .mode-item:hover {
   border-color: var(--border-active);
   color: var(--text);
@@ -307,7 +348,6 @@ hr {
 }
 
 .subject-item.active,
-.quality-item.active,
 .mode-item.active {
   background: var(--accent);
   color: var(--accent-text);
