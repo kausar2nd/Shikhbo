@@ -4,13 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>শিখবো - Shikhbo</title>
-  <link rel="stylesheet" href="/static/css/chat.css" />
+  <title>শিখবো — Shikhbo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
     rel="stylesheet">
-
+  <link rel="stylesheet" href="/static/css/chat.css" />
 </head>
 
 <body>
@@ -19,28 +18,37 @@
   <header class="topbar">
     <div class="topbar-inner">
       <div class="logo">
-        <span class="logo-icon">⬡</span>
-        <span class="logo-text">শিখবো - Shikhbo</span>
+        <div class="logo-mark">
+          <svg class="logo-book" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            <line x1="8" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="8" y1="11" x2="13" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span class="logo-bn">শিখবো - Shikhbo</span>
+          <!-- <span class="logo-en">Shikhbo</span> -->
+        </div>
       </div>
-
-      <button class="nav-text-btn" onclick="openProfileModal()" data-en="Edit Profile" data-bn="প্রোফাইল আপডেট">প্রোফাইল
-        আপডেট</button>
 
       <!-- Language Toggle -->
       <div class="segmented-control">
         <button class="seg-btn" id="langBnBtn" onclick="setLanguage('bn')">বাংলা</button>
         <button class="seg-btn" id="langEnBtn" onclick="setLanguage('en')">English</button>
       </div>
-
-
-
-      <button class="nav-text-btn logout-right" onclick="logout()" data-en="Log Out" data-bn="লগ আউট">লগ আউট</button>
     </div>
   </header>
 
   <!-- ── CHAT AREA ──────────────────────────────────────────────────────── -->
   <main class="chat-main">
+
+    <!-- Left Panel -->
     <div class="left-panel">
+
       <div class="panel-section">
         <h4 data-en="Subject" data-bn="বিষয়">বিষয়</h4>
         <div class="subject-list">
@@ -66,37 +74,71 @@
             data-bn="ধাপে ধাপে">ধাপে ধাপে</button>
         </div>
       </div>
-    </div>
 
-    <div class="chat-window" id="chatWindow">
-      <div class="chat-messages" id="chatMessages">
-        <div class="welcome-msg" id="welcomeMsg">
-          <div class="welcome-icon">⬡</div>
-          <h2><span data-en="Hello, " data-bn="হ্যালো, ">হ্যালো, </span><span id="welcomeName">বন্ধু</span>!</h2>
-          <p data-en="Pick a subject and mode, then ask me anything." data-bn="তোমার বিষয় ও পড়ার ধরন
-            নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।">তোমার বিষয় ও পড়ার ধরন
-            নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।</p>
+      <!-- User info card with profile actions -->
+      <div class="user-info-card" id="userInfoCard" style="display:none;">
+        <div class="user-avatar-row">
+          <div class="user-avatar" id="avatarInitial">?</div>
+          <div>
+            <div class="user-name" id="uName">—</div>
+            <div class="user-meta" id="uMeta">—</div>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <button class="profile-action-btn" onclick="openProfileModal()" data-en="Edit Profile"
+            data-bn="প্রোফাইল">প্রোফাইল</button>
+          <button class="profile-action-btn logout-btn" onclick="logout()" data-en="Log Out" data-bn="লগ আউট">লগ
+            আউট</button>
         </div>
       </div>
 
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-messages" id="chatMessages">
+        <div class="welcome-msg" id="welcomeMsg">
+          <div class="welcome-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              style="color:var(--accent)">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              <line x1="8" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="8" y1="11" x2="13" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h2>
+            <span data-en="Hello, " data-bn="হ্যালো, ">হ্যালো, </span><span id="welcomeName">বন্ধু</span>!
+          </h2>
+          <p data-en="Pick a subject and mode, then ask me anything."
+            data-bn="তোমার বিষয় ও পড়ার ধরন নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।">
+            তোমার বিষয় ও পড়ার ধরন নির্বাচন করো, তারপর যা জানতে চাও জিজ্ঞাসা করো।
+          </p>
+        </div>
+      </div>
+
+      <!-- Input bar -->
       <div class="input-bar">
         <div class="input-inner">
           <div class="context-chips">
             <span class="chip" id="chipSubject">ICT</span>
-            <span class="chip chip-mode" id="chipMode" data-en="Normal" data-bn="স্বাভাবিক">স্বাভাবিক</span>
-            <span class="chip chip-class" id="chipClass">—</span>
-            <span class="chip chip-curriculum" id="chipCurriculum">—</span>
+            <span class="chip" id="chipMode" data-en="Normal" data-bn="স্বাভাবিক">স্বাভাবিক</span>
+            <span class="chip" id="chipClass">—</span>
+            <span class="chip" id="chipCurriculum">—</span>
           </div>
 
-          <!-- Attachment preview (hidden by default) -->
+          <!-- Attachment preview -->
           <div class="attachment-preview" id="attachmentPreview" style="display: none;">
             <div class="attachment-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
               </svg>
               <span id="attachmentName">file.pdf</span>
-              <button class="attachment-remove" id="attachmentRemoveBtn" onclick="removeAttachment()" title="Remove">&times;</button>
+              <button class="attachment-remove" onclick="removeAttachment()" title="Remove">&times;</button>
             </div>
           </div>
 
@@ -104,16 +146,20 @@
             <textarea id="queryInput" data-en="Ask a question…" data-bn="প্রশ্ন লিখো…" placeholder="প্রশ্ন লিখো…"
               rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
 
-            <!-- Hidden file input -->
-            <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.webp,.gif,.pdf,.txt" style="display: none;" onchange="handleFileSelect(event)" />
+            <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.webp,.gif,.pdf,.txt" style="display: none;"
+              onchange="handleFileSelect(event)" />
 
-            <button class="icon-btn clip-btn" id="clipBtn" onclick="document.getElementById('fileInput').click()" title="Attach file">
+            <button class="icon-btn clip-btn" id="clipBtn" onclick="document.getElementById('fileInput').click()"
+              title="Attach file">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                <path
+                  d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48">
+                </path>
               </svg>
             </button>
-            <button class="icon-btn mic-btn" id="micBtn" onclick="toggleRecording()" title="Record Audio">
+
+            <button class="icon-btn mic-btn" id="micBtn" onclick="toggleRecording()" title="Voice input">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
@@ -122,8 +168,9 @@
                 <line x1="8" y1="23" x2="16" y2="23"></line>
               </svg>
             </button>
+
             <button class="send-btn" id="sendBtn" onclick="sendQuery()">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+              <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
                 <path d="M3 10L17 3l-7 7 7 7-14-7z" fill="currentColor" />
               </svg>
             </button>
@@ -168,7 +215,6 @@
   </div>
 
   <script>
-    // In a full REST app, we fetch the current user's info instead of using Jinja templates
     let SERVER_USER = null;
     fetch('/api/me')
       .then(r => r.json())
@@ -176,6 +222,9 @@
         if (data.user) {
           SERVER_USER = data.user;
           if (typeof initUserInfo === 'function') initUserInfo();
+          // Show user card
+          document.getElementById('userInfoCard').style.display = 'flex';
+          document.getElementById('userInfoCard').style.flexDirection = 'column';
         }
       });
   </script>

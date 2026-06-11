@@ -8,24 +8,30 @@
 }
 
 :root {
-  --bg: #141619;
-  --surface: #1e2126;
-  --surface-2: #303841;
-  --border: rgba(255, 255, 255, 0.12);
-  --border-active: rgba(255, 255, 255, 0.55);
-  --accent: #ffffff;
-  --accent-dim: rgba(255, 255, 255, 0.08);
-  --accent-glow: rgba(255, 255, 255, 0.18);
-  --text: #f0f0f0;
-  --text-dim: #b0b0b0;
-  --text-muted: #6a6a6a;
-  --green: #3dd68c;
-  --red: #ff5f6d;
-  --radius: 6px;
-  --radius-sm: 5px;
-  --layout-max-width: 1400px;
-  --font-display: 'Ubuntu', sans-serif;
-  --font-body: 'Ubuntu', sans-serif;
+  --bg: #0d1117;
+  --bg-2: #131920;
+  --surface: #161b22;
+  --surface-2: #1c2433;
+  --surface-3: #253040;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-mid: rgba(255, 255, 255, 0.10);
+  --border-hi: rgba(255, 255, 255, 0.25);
+  --accent: #2596be;
+  --accent-dim: rgba(37, 150, 190, 0.10);
+  --accent-glow: rgba(37, 150, 190, 0.06);
+  --accent-bright: #3ab4de;
+  --text: #e2e8f0;
+  --text-dim: #8b9bb4;
+  --text-muted: #4a5568;
+  --red: #e05a6a;
+  --green: #3ecf8e;
+  --radius: 10px;
+  --radius-lg: 12px;
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', 'Ubuntu', sans-serif;
+  --font-bn-logo: 'Hind Siliguri', sans-serif;
+  --font-bn-body: 'Noto Serif Bengali', serif;
+  --max-w: 1380px;
 }
 
 html,
@@ -40,40 +46,50 @@ body {
 }
 
 /* ── Background ──────────────────────────────────────────────────────────── */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 12% 25%, rgba(37, 150, 190, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 45% at 85% 80%, rgba(37, 150, 190, 0.025) 0%, transparent 55%);
+}
+
 .bg-grid {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
   pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-.glow {
+.corner-mark {
   position: fixed;
   z-index: 0;
-  border-radius: 50%;
-  filter: blur(100px);
   pointer-events: none;
-  opacity: 0.15;
+  width: 80px;
+  height: 80px;
+  opacity: 0.12;
 }
 
-.glow-1 {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, #555555, transparent 70%);
-  top: -150px;
-  left: -100px;
+.corner-mark.tl {
+  top: 0;
+  left: 0;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  border-radius: 0 0 28px 0;
 }
 
-.glow-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #888888, transparent 70%);
-  bottom: -100px;
-  right: -80px;
+.corner-mark.br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  border-radius: 28px 0 0 0;
 }
 
 /* ── Wrapper ─────────────────────────────────────────────────────────────── */
@@ -89,39 +105,63 @@ body {
 /* ── Header ──────────────────────────────────────────────────────────────── */
 .site-header {
   width: 100%;
-  max-width: var(--layout-max-width);
-  padding: 28px 40px;
+  max-width: var(--max-w);
+  padding: 28px 48px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 13px;
 }
 
-.logo-icon {
-  font-size: 22px;
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--accent);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: var(--accent-dim);
+}
+
+.logo-book {
   color: var(--accent);
-  animation: spin 8s linear infinite;
 }
 
-.logo-text {
-  font-family: var(--font-display);
-  font-size: 20px;
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.logo-bn {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.1;
+  font-weight: 400;
+}
+
+/* Hind Siliguri specifically for logo Bengali text */
+.logo-bn.bn-logo {
+  font-family: var(--font-bn-logo);
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+}
+
+.logo-en {
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  color: var(--accent);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
 }
 
 /* ── Hero ────────────────────────────────────────────────────────────────── */
@@ -131,74 +171,137 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  text-align: left;
-  padding: 40px 40px 60px;
-  max-width: var(--layout-max-width);
+  padding: 20px 48px 60px;
+  max-width: var(--max-w);
   width: 100%;
-  gap: 40px;
+  gap: 60px;
 }
 
 .hero-text-content {
   flex: 1;
-  max-width: 700px;
+  max-width: 640px;
 }
 
-.hero-label {
-  display: inline-block;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--accent-dim);
-  border: 1px solid var(--border-active);
-  color: var(--accent);
-  font-size: 11px;
+  border: 1px solid rgba(37, 150, 190, 0.20);
+  color: var(--accent-bright);
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 5px 14px;
+  padding: 5px 13px;
   border-radius: 100px;
-  margin-bottom: 22px;
+  margin-bottom: 28px;
   animation: fadeUp 0.5s ease both;
+}
+
+.hero-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 2.5s ease infinite;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+  50% {
+    opacity: .4;
+    transform: scale(0.7)
+  }
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 6vw, 64px);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  font-size: 80px;
+  /* font-size: clamp(74px, 5.2vw, 62px); */
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  margin-bottom: 18px;
   animation: fadeUp 0.5s 0.1s ease both;
+  color: var(--text);
 }
 
 .hero-title em {
   font-style: italic;
-  background: linear-gradient(135deg, var(--accent), #aaaaaa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-bright);
+}
+
+.hero-title .divider {
+  display: block;
+  width: 36px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 14px 0;
 }
 
 .hero-sub {
   color: var(--text-dim);
   font-size: 16px;
   font-weight: 300;
-  margin-bottom: 40px;
+  line-height: 1.7;
+  margin-bottom: 36px;
   animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.hero-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeUp 0.5s 0.25s ease both;
+}
+
+.feat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-dim);
+}
+
+.feat-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(37, 150, 190, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  color: var(--accent);
 }
 
 /* ── Auth Panel ──────────────────────────────────────────────────────────── */
 .auth-panel {
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
   animation: fadeUp 0.5s 0.3s ease both;
+  position: relative;
 }
 
+/* ── Tab Bar ─────────────────────────────────────────────────────────────── */
 .tab-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  background: var(--bg-2);
   border-bottom: 1px solid var(--border);
 }
 
@@ -206,13 +309,14 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 16px;
-  font-family: var(--font-display);
-  font-size: 14px;
+  padding: 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
   transition: all 0.2s;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+  position: relative;
 }
 
 .tab:hover {
@@ -221,17 +325,26 @@ body {
 
 .tab.active {
   color: var(--text);
-  background: var(--surface-2);
-  border-bottom: 2px solid var(--accent);
-  margin-bottom: -1px;
+  background: var(--surface);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
 }
 
 /* ── Forms ───────────────────────────────────────────────────────────────── */
 .auth-form {
   display: none;
   flex-direction: column;
-  gap: 16px;
-  padding: 28px;
+  gap: 13px;
+  padding: 24px 26px;
 }
 
 .auth-form.active {
@@ -241,34 +354,34 @@ body {
 .fields-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .field-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .field-group label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-dim);
-  letter-spacing: 0.5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 
 input,
 select {
   background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-mid);
+  border-radius: 7px;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 14px;
-  padding: 11px 14px;
+  padding: 9px 12px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   width: 100%;
 }
 
@@ -278,16 +391,18 @@ input::placeholder {
 
 input:focus,
 select:focus {
-  border-color: var(--border-active);
-  box-shadow: 0 0 0 3px var(--accent-dim);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37, 150, 190, 0.1);
+  background: var(--surface-3);
 }
 
 select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%237a8299' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%236a7a8a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 14px center;
+  background-position: right 13px center;
+  padding-right: 36px;
 }
 
 select option {
@@ -295,28 +410,28 @@ select option {
 }
 
 .error-msg {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--red);
-  min-height: 18px;
-  margin-top: -4px;
+  min-height: 16px;
+  margin-top: -2px;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: var(--bg);
+  color: #fff;
   border: none;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 15px;
+  border-radius: 7px;
+  font-family: var(--font-body);
+  font-size: 14px;
   font-weight: 700;
-  padding: 13px;
+  padding: 11px;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s;
   letter-spacing: 0.3px;
 }
 
 .btn-primary:hover {
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .btn-primary:active {
@@ -324,37 +439,37 @@ select option {
 }
 
 .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
   transform: none;
 }
 
 .btn-loader {
   letter-spacing: 4px;
-  animation: pulse 0.8s infinite alternate;
+  animation: pulse-btn 0.8s infinite alternate;
 }
 
-@keyframes pulse {
+@keyframes pulse-btn {
   from {
-    opacity: 0.4;
+    opacity: 0.3
   }
 
   to {
-    opacity: 1;
+    opacity: 1
   }
 }
 
 .switch-hint {
   text-align: center;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-muted);
-  margin-top: -4px;
+  margin-top: -2px;
 }
 
 .switch-hint a {
   color: var(--accent);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .switch-hint a:hover {
@@ -364,38 +479,41 @@ select option {
 /* ── Lang Toggle ─────────────────────────────────────────────────────────── */
 .lang-toggle {
   background: var(--surface-2);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-mid);
   color: var(--text-dim);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
+  padding: 5px 13px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
 
 .lang-toggle:hover {
-  border-color: var(--border-active);
-  color: var(--text);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ── Footer ──────────────────────────────────────────────────────────────── */
 .site-footer {
-  padding: 24px 40px;
+  padding: 22px 48px;
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: var(--layout-max-width);
-  font-size: 12px;
+  max-width: var(--max-w);
+  font-size: 11.5px;
   color: var(--text-muted);
+  gap: 16px;
+  align-items: center;
 }
 
 /* ── Animations ──────────────────────────────────────────────────────────── */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
 
   to {
@@ -404,7 +522,56 @@ select option {
   }
 }
 
-/* ── Responsive ──────────────────────────────────────────────────────────── */
+/* ── Bengali Font Override (unicode-range) ───────────────────────────────── */
+/* Stack Noto Serif Bengali before DM Sans so Bengali codepoints use the serif
+   Bengali face; Latin/numerics fall through to DM Sans automatically. */
+body,
+.hero-badge,
+.hero-title,
+.hero-sub,
+.hero-features,
+.feat-row,
+.auth-panel,
+.tab,
+.auth-form,
+.field-group label,
+.field-group input,
+.field-group select,
+.btn-primary,
+.switch-hint,
+.error-msg,
+.site-footer,
+.lang-toggle {
+  font-family: var(--font-bn-body), var(--font-body);
+}
+
+/* Logo wordmark Bengali text: Hind Siliguri */
+.logo-bn.bn-logo {
+  font-family: var(--font-bn-logo), sans-serif;
+  font-weight: 700;
+}
+
+/* Keep hero title using display font for en version; bn inherits via JS toggle */
+.hero-title {
+  font-family: var(--font-bn-body), var(--font-display), serif;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    flex-direction: column;
+    padding: 20px 24px 40px;
+    gap: 36px;
+  }
+
+  .hero-text-content {
+    max-width: 100%;
+  }
+
+  .hero-features {
+    display: none;
+  }
+}
+
 @media (max-width: 520px) {
   .fields-row {
     grid-template-columns: 1fr;
@@ -420,7 +587,10 @@ select option {
   }
 
   .hero {
-    padding: 20px 16px 40px;
-    flex-direction: column;
+    padding: 16px 16px 36px;
+  }
+
+  .hero-title {
+    font-size: 34px;
   }
 }

@@ -4,46 +4,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>শিখবো - Shikhbo</title>
-  <link rel="stylesheet" href="/static/css/landing.css" />
+  <title>শিখবো — Shikhbo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Hind+Siliguri:wght@400;600;700&family=Noto+Serif+Bengali:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/landing.css" />
 </head>
 
 <body>
 
-  <!-- Background grid -->
+  <div class="bg-noise"></div>
   <div class="bg-grid"></div>
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
+  <div class="corner-mark tl"></div>
+  <div class="corner-mark br"></div>
 
-  <!-- Main container -->
   <div class="landing-wrapper">
 
-    <header class="site-header" style="justify-content: space-between;">
+    <header class="site-header">
       <div class="logo">
-        <span class="logo-icon">⬡</span>
-        <span class="logo-text">শিখবো - Shikhbo</span>
+        <div class="logo-mark">
+          <svg class="logo-book" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="8" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="8" y1="11" x2="13" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span class="logo-bn bn-logo">শিখবো</span>
+          <span class="logo-en">Shikhbo</span>
+        </div>
       </div>
       <button id="langToggleBtn" onclick="toggleLanguage()" class="lang-toggle">English</button>
     </header>
 
     <main class="hero">
       <div class="hero-text-content">
-        <p class="hero-label" data-en="Your AI Study Partner" data-bn="তোমার AI স্টাডি পার্টনার">তোমার AI স্টাডি
-          পার্টনার</p>
-        <h1 class="hero-title" data-en="Learn smarter,<br><em>not harder.</em>"
-          data-bn="শেখার স্মার্ট সলিউশন<br><em>এখন বই থেকেই</em>">আপনার সার্বক্ষণিক,<br><em>আপনার সার্বক্ষণিক স্টাডি
-            পার্টনার।</em></h1>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span data-en="Your AI Study Partner" data-bn="তোমার AI স্টাডি পার্টনার">তোমার AI স্টাডি পার্টনার</span>
+        </div>
+
+        <h1 class="hero-title" data-en="Learn smarter,<span class='divider'></span><em>not harder.</em>"
+          data-bn="শেখার স্মার্ট সলিউশন<span class='divider'></span><em>এখন বই থেকেই।</em>">
+          শেখার স্মার্ট সলিউশন<span class="divider"></span><em>এখন বই থেকেই।</em>
+        </h1>
+
         <p class="hero-sub" data-en="Tough topics, now in your pocket. Study made easy, step by step, your way."
-          data-bn="কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।">কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা
-          হোক সহজ, ধাপে ধাপে, নিজের মতো</p>
+          data-bn="কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।">
+          কঠিন টপিক এখন হাতের মুঠোয়। পড়াশোনা হোক সহজ, ধাপে ধাপে, নিজের মতো।
+        </p>
+
+        <div class="hero-features">
+          <div class="feat-row">
+            <div class="feat-icon">⬡</div>
+            <span data-en="Personalized for your class &amp; curriculum"
+              data-bn="তোমার ক্লাস ও কারিকুলাম অনুযায়ী পার্সোনালাইজড">তোমার ক্লাস ও কারিকুলাম অনুযায়ী
+              পার্সোনালাইজড</span>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">◈</div>
+            <span data-en="Voice input, file upload &amp; multiple study modes"
+              data-bn="ভয়েস ইনপুট, ফাইল আপলোডের সাথে আছে আলাদা আলাদা মোড">ভয়েস ইনপুট, ফাইল আপলোডের সাথে আছে আলাদা
+              আলাদা মোড</span>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">◇</div>
+            <span data-en="Bengali &amp; English — fully bilingual answers"
+              data-bn="ব্যবহার করো বাংলা ও ইংরেজিতে">ব্যবহার করো বাংলা ও ইংরেজিতে</span>
+          </div>
+        </div>
       </div>
 
+      <!-- AUTH PANEL -->
       <div class="auth-panel" id="authPanel">
-        <!-- TAB BAR -->
         <div class="tab-bar">
           <button class="tab active" id="tabLogin" onclick="switchTab('login')" data-en="Log In" data-bn="লগ ইন">লগ
             ইন</button>
@@ -51,7 +87,7 @@
             data-bn="রেজিস্টার">রেজিস্টার</button>
         </div>
 
-        <!-- LOGIN FORM -->
+        <!-- LOGIN -->
         <form id="loginForm" class="auth-form active" onsubmit="handleLogin(event)">
           <div class="field-group">
             <label data-en="Email" data-bn="ইমেইল">ইমেইল</label>
@@ -59,8 +95,7 @@
           </div>
           <div class="field-group">
             <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
-            <input type="password" id="loginPassword" data-en="••••••••" data-bn="••••••••" placeholder="••••••••"
-              required />
+            <input type="password" id="loginPassword" placeholder="••••••••" required />
           </div>
           <div class="error-msg" id="loginError"></div>
           <button type="submit" class="btn-primary" id="loginBtn">
@@ -70,10 +105,11 @@
           <p class="switch-hint"
             data-en="Don't have an account? <a href='#' onclick='switchTab(&quot;signup&quot;); return false;'>Sign Up</a>"
             data-bn="অ্যাকাউন্ট নেই? <a href='#' onclick='switchTab(&quot;signup&quot;); return false;'>রেজিস্টার করো</a>">
-            অ্যাকাউন্ট নেই? <a href="#" onclick="switchTab('signup'); return false;">রেজিস্টার করো</a></p>
+            অ্যাকাউন্ট নেই? <a href="#" onclick="switchTab('signup'); return false;">রেজিস্টার করো</a>
+          </p>
         </form>
 
-        <!-- SIGN UP FORM -->
+        <!-- SIGN UP -->
         <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
           <div class="field-group">
             <label data-en="Full Name" data-bn="পুরো নাম">পুরো নাম</label>
@@ -100,14 +136,15 @@
             <div class="field-group">
               <label data-en="Class / Grade" data-bn="ক্লাস">ক্লাস</label>
               <select id="signupClass" required disabled>
-                <option value="" data-en="Select curriculum first" data-bn="আগে কারিকুলাম নির্বাচন করো">আগে কারিকুলাম নির্বাচন করো</option>
+                <option value="" data-en="Select curriculum first" data-bn="আগে কারিকুলাম নির্বাচন করো">আগে কারিকুলাম
+                  নির্বাচন করো</option>
               </select>
             </div>
           </div>
           <div class="field-group">
             <label data-en="Password" data-bn="পাসওয়ার্ড">পাসওয়ার্ড</label>
-            <input type="password" id="signupPassword" data-en="Min 6 characters" data-bn="কমপক্ষে ৬ অক্ষর" placeholder="কমপক্ষে ৬ অক্ষর"
-              required minlength="6" />
+            <input type="password" id="signupPassword" data-en="Min 6 characters" data-bn="কমপক্ষে ৬ অক্ষর"
+              placeholder="কমপক্ষে ৬ অক্ষর" required minlength="6" />
           </div>
           <div class="error-msg" id="signupError"></div>
           <button type="submit" class="btn-primary" id="signupBtn">
@@ -117,14 +154,17 @@
           <p class="switch-hint"
             data-en="Already have an account? <a href='#' onclick='switchTab(&quot;login&quot;); return false;'>Log In</a>"
             data-bn="অ্যাকাউন্ট আছে? <a href='#' onclick='switchTab(&quot;login&quot;); return false;'>লগ ইন করো</a>">
-            অ্যাকাউন্ট আছে? <a href="#" onclick="switchTab('login'); return false;">লগ ইন করো</a></p>
+            অ্যাকাউন্ট আছে? <a href="#" onclick="switchTab('login'); return false;">লগ ইন করো</a>
+          </p>
         </form>
       </div>
     </main>
-    <footer class="site-footer">
-      <span>Shikhbo © 2026</span>
-    </footer>
 
+    <footer class="site-footer">
+      <span>Shikhbo &copy; 2026</span>
+      <span style="color:var(--accent);opacity:0.4">·</span>
+      <span>Educational AI for Bangladesh</span>
+    </footer>
   </div>
 
   <script src="/static/js/lang.js"></script>
