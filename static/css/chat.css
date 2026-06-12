@@ -8,21 +8,21 @@
 }
 
 :root {
-  --bg: #0d1117;
-  --bg-2: #111820;
-  --surface: #161b22;
-  --surface-2: #1c2433;
-  --surface-3: #253040;
+  --bg: #141619;
+  --bg-2: #1a1c20;
+  --surface: #1f2125;
+  --surface-2: #26292e;
+  --surface-3: #2e3137;
   --border: rgba(255, 255, 255, 0.06);
   --border-mid: rgba(255, 255, 255, 0.10);
-  --border-hi: rgba(255, 255, 255, 0.25);
-  --accent: #2596be;
-  --accent-dim: rgba(37, 150, 190, 0.10);
-  --accent-glow: rgba(37, 150, 190, 0.06);
-  --accent-bright: #3ab4de;
-  --text: #e2e8f0;
-  --text-dim: #8b9bb4;
-  --text-muted: #4a5568;
+  --border-hi: rgba(255, 255, 255, 0.30);
+  --accent: #c8cdd4;
+  --accent-dim: rgba(200, 205, 212, 0.10);
+  --accent-glow: rgba(200, 205, 212, 0.05);
+  --accent-bright: #f5f6f7;
+  --text: #f0f1f3;
+  --text-dim: #9aa0ab;
+  --text-muted: #52585f;
   --red: #e05a6a;
   --green: #3ecf8e;
   --topbar-h: 65px;
@@ -30,7 +30,7 @@
   --radius-sm: 7px;
   --font-display: 'DM Serif Display', serif;
   --font-body: 'DM Sans', 'Ubuntu', sans-serif;
-  --topbar-bg: rgba(13, 17, 23, 0.92);
+  --topbar-bg: rgba(20, 22, 25, 0.92);
 }
 
 html,
@@ -161,8 +161,8 @@ hr {
 
 .seg-btn.active {
   background: var(--accent);
-  color: #fff;
-  box-shadow: 0 1px 4px rgba(37, 150, 190, 0.25);
+  color: #141619;
+  box-shadow: 0 1px 4px rgba(200, 205, 212, 0.20);
 }
 
 /* ── Icon Buttons ─────────────────────────────────────────────────────────── */
@@ -183,7 +183,7 @@ hr {
 
 .icon-btn:hover {
   color: var(--accent);
-  border-color: rgba(37, 150, 190, 0.35);
+  border-color: rgba(255, 255, 255, 0.22);
   background: var(--surface-2);
 }
 
@@ -234,7 +234,7 @@ hr {
   align-items: center;
   gap: 7px;
   background: var(--surface-2);
-  border: 1px solid rgba(37, 150, 190, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-sm);
   padding: 5px 11px;
   font-size: 12px;
@@ -566,8 +566,8 @@ hr {
 
 .msg.user .msg-avatar {
   background: var(--accent-dim);
-  border: 1.5px solid rgba(37, 150, 190, 0.30);
-  color: var(--accent);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: var(--text);
 }
 
 .msg.bot .msg-avatar {
@@ -587,8 +587,9 @@ hr {
 }
 
 .msg.user .msg-bubble {
-  background: var(--accent);
-  color: #fff;
+  background: var(--surface-3);
+  color: var(--text);
+  border: 1px solid var(--border-hi);
   border-bottom-right-radius: 2px;
 }
 
@@ -700,8 +701,8 @@ textarea::placeholder {
 }
 
 textarea:focus {
-  border-color: rgba(37, 150, 190, 0.45);
-  box-shadow: 0 0 0 2px rgba(37, 150, 190, 0.08);
+  border-color: rgba(255, 255, 255, 0.30);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
 }
 
 .send-btn {
@@ -715,7 +716,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #141619;
   transform: rotate(180deg);
   transition: opacity 0.2s, transform 0.15s;
 }
@@ -851,7 +852,7 @@ textarea:focus {
 .form-group input:focus,
 .form-group select:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(37, 150, 190, 0.1);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
 }
 
 .form-group select {
@@ -895,8 +896,8 @@ textarea:focus {
 
 /* ── Speech Button ────────────────────────────────────────────────────────── */
 .speech-btn {
-  background: rgba(37, 150, 190, 0.1) !important;
-  border: 1px solid rgba(37, 150, 190, 0.2) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: 5px !important;
   color: var(--accent) !important;
   cursor: pointer;
@@ -906,7 +907,7 @@ textarea:focus {
 }
 
 .speech-btn:hover {
-  background: rgba(37, 150, 190, 0.18) !important;
+  background: rgba(255, 255, 255, 0.11) !important;
 }
 
 /* ── Sources ──────────────────────────────────────────────────────────────── */
